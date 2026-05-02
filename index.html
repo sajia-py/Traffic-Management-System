@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Controls & Analytics -->
+        <aside class="sidebar">
+            <header class="header">
+                <h1>🚦 Smart Traffic System</h1>
+                <p>OS Concepts Simulator</p>
+            </header>
+
+            <section class="controls-panel card">
+                <h2>🎮 Controls</h2>
+                <div class="control-group">
+                    <button id="btn-start" class="btn btn-primary">▶️ Start</button>
+                    <button id="btn-stop" class="btn btn-secondary">⏹ Stop</button>
+                </div>
+                
+                <div class="algorithm-selector">
+                    <h3>Scheduling Algorithm</h3>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="algorithm" value="FCFS" checked>
+                            FCFS
+                        </label>
+                        <label>
+                            <input type="radio" name="algorithm" value="RR">
+                            Round Robin
+                        </label>
+                        <label>
+                            <input type="radio" name="algorithm" value="PRIORITY">
+                            Priority
+                        </label>
+                    </div>
+                </div>
+
+                <button id="btn-emergency" class="btn btn-danger">🚨 Trigger Emergency</button>
+            </section>
+
+            <section class="status-panel card">
+                <h2>📊 Live Status</h2>
+                <div class="status-item">
+                    <span>Status:</span>
+                    <span id="system-status" class="badge bg-green">🟢 Running</span>
+                </div>
+                <div class="status-item">
+                    <span>Active Algorithm:</span>
+                    <span id="active-algo" class="code-badge">FCFS</span>
+                </div>
+                <div class="status-item">
+                    <span>Green Light:</span>
+                    <span id="active-green">None</span>
+                </div>
+                <div class="status-item">
+                    <span>Total Processed:</span>
+                    <span id="total-processed">0</span>
+                </div>
+            </section>
+
+            <section class="analytics-panel card">
+                <h2>📈 Avg Wait Time (s)</h2>
+                <div class="bar-chart" id="chart-fcfs">
+                    <span class="label">FCFS</span>
+                    <div class="bar"><div class="fill" style="width: 0%;"></div></div>
+                    <span class="value">0.00</span>
+                </div>
+                <div class="bar-chart" id="chart-rr">
+                    <span class="label">RR</span>
+                    <div class="bar"><div class="fill" style="width: 0%;"></div></div>
+                    <span class="value">0.00</span>
+                </div>
+                <div class="bar-chart" id="chart-priority">
+                    <span class="label">PRIORITY</span>
+                    <div class="bar"><div class="fill" style="width: 0%;"></div></div>
+                    <span class="value">0.00</span>
+                </div>
+            </section>
+            
+            <section class="info-panel card">
+                <h2>📖 How It Works</h2>
+                <ul>
+                    <li><strong>FCFS:</strong> Oldest waiting vehicle gets green light first.</li>
+                    <li><strong>Round Robin:</strong> Fixed-time turn (N → S → E → W).</li>
+                    <li><strong>Priority:</strong> Emergency vehicles preempt signals.</li>
+                </ul>
+            </section>
+        </aside>
+
+        <!-- Main Visualization Area -->
+        <main class="simulation-area">
+            <div class="intersection-wrapper">
+                <!-- Metrics Overlay -->
+                <div class="queue-metrics">
+                    <div class="metric north">N: <span id="queue-N">0</span></div>
+                    <div class="metric south">S: <span id="queue-S">0</span></div>
+                    <div class="metric east">E: <span id="queue-E">0</span></div>
+                    <div class="metric west">W: <span id="queue-W">0</span></div>
+                </div>
+
+                <!-- Intersection Graphic -->
+                <div class="intersection">
+                    <div class="road vertical"></div>
+                    <div class="road horizontal"></div>
+                    
+                    <!-- Traffic Lights -->
+                    <div class="traffic-light north" id="light-N">
+                        <div class="bulb red active"></div>
+                        <div class="bulb green"></div>
+                    </div>
+                    <div class="traffic-light south" id="light-S">
+                        <div class="bulb red active"></div>
+                        <div class="bulb green"></div>
+                    </div>
+                    <div class="traffic-light east" id="light-E">
+                        <div class="bulb red active"></div>
+                        <div class="bulb green"></div>
+                    </div>
+                    <div class="traffic-light west" id="light-W">
+                        <div class="bulb red active"></div>
+                        <div class="bulb green"></div>
+                    </div>
+
+                    <!-- Cars Container -->
+                    <div id="cars-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

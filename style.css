@@ -1,0 +1,406 @@
+:root {
+    --bg-main: #0e1117;
+    --bg-card: #1e1e2e;
+    --text-main: #ffffff;
+    --text-muted: #a0a0b0;
+    --primary: #4e8cff;
+    --secondary: #444;
+    --danger: #ff4444;
+    --success: #00ff88;
+    --road-color: #333;
+    --road-markings: #ffcc00;
+    --glass-bg: rgba(30, 30, 46, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow: hidden; /* Prevent scroll on main app */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 350px;
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--glass-border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 8px;
+}
+
+.card h3 {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--success);
+    color: #000;
+}
+.btn-primary:hover {
+    background: #00cc6a;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: var(--text-main);
+}
+.btn-secondary:hover {
+    background: #555;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+    width: 100%;
+    margin-top: 15px;
+}
+.btn-danger:hover {
+    background: #cc0000;
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.4);
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.control-group .btn {
+    flex: 1;
+}
+
+/* Radio Group */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+input[type="radio"] {
+    accent-color: var(--success);
+    width: 16px;
+    height: 16px;
+}
+
+/* Status Panel */
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.badge.bg-green { background: rgba(0, 255, 136, 0.2); color: var(--success); }
+.badge.bg-red { background: rgba(255, 68, 68, 0.2); color: var(--danger); }
+
+.code-badge {
+    font-family: monospace;
+    background: #333;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #ffd700;
+}
+
+#active-green {
+    font-weight: bold;
+    color: var(--success);
+}
+
+/* Charts */
+.bar-chart {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+.bar-chart .label {
+    width: 70px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.bar-chart .bar {
+    flex: 1;
+    height: 12px;
+    background: #333;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.bar-chart .fill {
+    height: 100%;
+    background: var(--success);
+    transition: width 0.3s ease;
+}
+.bar-chart .value {
+    width: 40px;
+    text-align: right;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+/* Info List */
+.info-panel ul {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.info-panel li {
+    margin-bottom: 8px;
+}
+.info-panel strong {
+    color: var(--text-main);
+}
+
+/* Main Simulation Area */
+.simulation-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: radial-gradient(circle at center, #1a1e29 0%, #0e1117 100%);
+}
+
+.intersection-wrapper {
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+.queue-metrics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.metric {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: var(--text-main);
+    border: 1px solid var(--glass-border);
+}
+
+.metric.north { top: -40px; left: 50%; transform: translateX(-50%); }
+.metric.south { bottom: -40px; left: 50%; transform: translateX(-50%); }
+.metric.east { right: -60px; top: 50%; transform: translateY(-50%); }
+.metric.west { left: -60px; top: 50%; transform: translateY(-50%); }
+
+.intersection {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Roads */
+.road {
+    position: absolute;
+    background-color: var(--road-color);
+}
+
+/* Vertical Road */
+.road.vertical {
+    width: 160px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    background-image: linear-gradient(to bottom, transparent 50%, var(--road-color) 50%),
+                      linear-gradient(to bottom, var(--road-markings) 50%, transparent 50%);
+    background-size: 10px 40px, 4px 40px;
+    background-position: left center, center;
+    background-repeat: repeat-y;
+}
+
+/* Horizontal Road */
+.road.horizontal {
+    height: 160px;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    background-image: linear-gradient(to right, transparent 50%, var(--road-color) 50%),
+                      linear-gradient(to right, var(--road-markings) 50%, transparent 50%);
+    background-size: 40px 10px, 40px 4px;
+    background-position: center top, center;
+    background-repeat: repeat-x;
+}
+
+/* Hide overlapping dashed lines in intersection center */
+.road.horizontal::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 220px; /* center coordinates */
+    width: 160px; height: 160px;
+    background: var(--road-color);
+    z-index: 1;
+}
+
+/* Traffic Lights */
+.traffic-light {
+    position: absolute;
+    background: #222;
+    padding: 6px;
+    border-radius: 10px;
+    display: flex;
+    gap: 5px;
+    border: 2px solid #555;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.traffic-light.north { top: 160px; left: 160px; flex-direction: column; }
+.traffic-light.south { bottom: 160px; right: 160px; flex-direction: column; }
+.traffic-light.east { top: 160px; right: 160px; flex-direction: row; }
+.traffic-light.west { bottom: 160px; left: 160px; flex-direction: row; }
+
+.bulb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #111;
+    transition: all 0.3s ease;
+}
+
+.bulb.red.active {
+    background: #ff4444;
+    box-shadow: 0 0 15px #ff4444;
+}
+
+.bulb.green.active {
+    background: #00ff88;
+    box-shadow: 0 0 15px #00ff88;
+}
+
+/* Vehicles Container */
+#cars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Car Base */
+.car {
+    position: absolute;
+    border-radius: 4px;
+    transition: left 0.2s linear, top 0.2s linear;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.car-n, .car-s {
+    width: 30px;
+    height: 50px;
+}
+.car-e, .car-w {
+    width: 50px;
+    height: 30px;
+}
+
+/* Emergency Vehicle Styling */
+.car.emergency {
+    background: linear-gradient(45deg, #ff0000, #ff5555);
+    animation: flash-siren 0.5s infinite alternate;
+}
+
+@keyframes flash-siren {
+    0% { box-shadow: 0 0 20px #ff0000; }
+    100% { box-shadow: 0 0 20px #0000ff; }
+}
+
+/* Basic car colors */
+.color-0 { background-color: #ff5e5e; }
+.color-1 { background-color: #5e9cff; }
+.color-2 { background-color: #5effa8; }
+.color-3 { background-color: #ffd700; }
+.color-4 { background-color: #b15eff; }
